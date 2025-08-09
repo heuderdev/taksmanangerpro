@@ -1,0 +1,25 @@
+# Arquivo de configuração para o PHPStan com Larastan
+includes:
+    # Inclui as regras base do Larastan. Essencial para que ele entenda o Laravel.
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    # Nível de rigor da análise estática. Vai de 0 (mais baixo) a 9 (mais alto).
+    # Recomendo começar com um nível mais baixo, como 5, e aumentar gradualmente.
+    # Para um projeto novo, começar com 6 ou 7 é um ótimo objetivo.
+    level: 5
+
+    # Especifica os diretórios que o PHPStan deve analisar.
+    # É uma boa prática analisar apenas o código da sua aplicação (app).
+    paths:
+        - app/
+
+    # O Larastan precisa saber onde está o arquivo de "bootstrap" da aplicação
+    # para carregar corretamente o Service Container e outros detalhes.
+    # No Laravel 11, o caminho para o `bootstrap/app.php` é um pouco diferente.
+    bootstrapFiles:
+        - bootstrap/app.php
+
+    # (Opcional) Se você usa o Facade `DB`, descomente a linha abaixo
+    # para evitar falsos positivos sobre métodos estáticos não encontrados.
+    # checkMissingIterableValueType: false
