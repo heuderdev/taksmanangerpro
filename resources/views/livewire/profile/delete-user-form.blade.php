@@ -17,6 +17,7 @@ new class extends Component
             'password' => ['required', 'string', 'current_password'],
         ]);
 
+        // @phpstan-ignore-next-line
         tap(Auth::user(), $logout(...))->delete();
 
         $this->redirect('/', navigate: true);
@@ -36,8 +37,7 @@ new class extends Component
 
     <x-danger-button
         x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
         <form wire:submit="deleteUser" class="p-6">
@@ -59,8 +59,7 @@ new class extends Component
                     name="password"
                     type="password"
                     class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
+                    placeholder="{{ __('Password') }}" />
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
